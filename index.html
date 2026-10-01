@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e1013" media="(prefers-color-scheme: dark)">
+<title>Afaj | Portofolio 3D</title>
+<meta name="description" content="Portofolio visualisasi 3D: arsitektur, interior, dan karakter.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--ink:#101216;--mute:#6a7280;--line:#e7e9ec;--soft:#f0f1f3;--max:1240px;--pad:clamp(20px,4vw,48px);--ease:cubic-bezier(.2,.7,.2,1)}
+@media(prefers-color-scheme:dark){:root{--bg:#0e1013;--ink:#eef0f3;--mute:#8b94a1;--line:#23272e;--soft:#171a1f}}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+button{font:inherit}
+.bar{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;height:64px}
+.brand{font-weight:700;font-size:1.05rem;letter-spacing:-.01em}
+.prog{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--ink);transform:scaleX(0);transform-origin:left}
+nav{position:relative;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav button{position:relative;z-index:1;font-size:.92rem;font-weight:500;color:var(--mute);background:none;border:0;padding:8px 12px;border-radius:8px;cursor:pointer;white-space:nowrap;transition:color .25s}
+nav button:hover,nav button[aria-pressed=true]{color:var(--ink)}
+nav small{font-size:.78rem;margin-left:5px;opacity:.7}
+.ind{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:8px;background:var(--soft);transition:transform .45s var(--ease),width .45s var(--ease)}
+.hero{position:relative;height:min(88vh,820px);height:min(88svh,820px);min-height:440px;overflow:hidden;background:#000;color:#fff}
+.slides{position:absolute;left:0;right:0;top:-20%;bottom:0;cursor:pointer;will-change:transform}
+.sl{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease}
+.sl.on{opacity:1}
+.sl img{width:100%;height:100%;object-fit:cover;display:block}
+.sl.on img{animation:kb 9s ease-out forwards}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.07)}}
+@keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hshade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,rgba(0,0,0,.74),rgba(0,0,0,0) 58%),linear-gradient(to bottom,rgba(0,0,0,.3),rgba(0,0,0,0) 28%)}
+.hcopy{position:absolute;left:0;right:0;bottom:108px;pointer-events:none}
+h1{font-size:clamp(2.5rem,7vw,5.4rem);font-weight:700;letter-spacing:-.04em;line-height:1;max-width:14ch}
+.hcopy p{margin-top:18px;max-width:44ch;color:rgba(255,255,255,.82);font-size:1.1rem}
+.hbar{position:absolute;left:0;right:0;bottom:0;padding-bottom:28px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.hcap{background:none;border:0;color:#fff;text-align:left;cursor:pointer;padding:0}
+.hcap b{display:block;font-size:1.1rem;font-weight:600}
+.hcap span{color:rgba(255,255,255,.75);font-size:.92rem}
+.dots{display:flex;gap:6px}
+.dot{position:relative;width:44px;height:18px;padding:0;background:none;border:0;cursor:pointer}
+.dot::before,.dot i{content:'';position:absolute;left:0;right:0;top:8px;height:2px}
+.dot::before{background:rgba(255,255,255,.35)}
+.dot i{background:#fff;transform:scaleX(0);transform-origin:left}
+.dot.done i{transform:scaleX(1)}
+.dot.on i{animation:fill 6s linear forwards}
+.hero.pause .sl.on img,.hero.pause .dot.on i{animation-play-state:paused}
+#grid{padding:clamp(48px,7vw,88px) 0 clamp(64px,10vw,120px);transition:opacity .18s,transform .18s}
+#grid.out{opacity:0;transform:translateY(8px)}
+.sec{padding-top:clamp(44px,6vw,80px)}
+.sec:first-child{padding-top:0}
+.sh{display:flex;justify-content:space-between;align-items:baseline;gap:24px;flex-wrap:wrap;border-top:1px solid var(--ink);padding-top:16px;margin-bottom:24px}
+.sh h2{font-size:1.35rem;font-weight:700;letter-spacing:-.02em}
+.sh h2 small{font-size:.9rem;font-weight:500;color:var(--mute);margin-left:10px}
+.sh p{color:var(--mute);font-size:.95rem;max-width:52ch}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rows{display:flex;flex-wrap:wrap;gap:8px}
+.card{position:relative;flex:none;overflow:hidden;border:0;padding:0;border-radius:6px;background:var(--soft);cursor:pointer;color:#fff;text-align:left}
+.card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease),filter .4s}
+.card:hover img,.card:focus-visible img{transform:scale(1.05)}
+.rows:has(.card:hover) .card:not(:hover) img{filter:brightness(.7) saturate(.8)}
+.ov{position:absolute;left:0;right:0;bottom:0;padding:44px 16px 14px;background:linear-gradient(to top,rgba(0,0,0,.72),transparent);display:flex;justify-content:space-between;align-items:flex-end;gap:12px;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s var(--ease)}
+.card:hover .ov,.card:focus-visible .ov{opacity:1;transform:none}
+@media(hover:none){.ov{opacity:1;transform:none;padding-top:30px}}
+.ov b{font-weight:600;font-size:.95rem}
+.ov span{font-size:.82rem;opacity:.8;white-space:nowrap}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:6px}
+.hero :focus-visible,.card:focus-visible{outline-color:#fff;outline-offset:-3px}
+footer{border-top:1px solid var(--line);padding:32px 0 48px;color:var(--mute);font-size:.92rem}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:var(--ink);text-decoration:none;margin-left:20px}
+footer a:hover{text-decoration:underline}
+.lb{position:fixed;inset:0;z-index:10;background:var(--bg);display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.lb.on{opacity:1;visibility:visible}
+.lb .top{display:flex;justify-content:space-between;align-items:center;padding:12px var(--pad);font-size:.92rem;color:var(--mute)}
+.lb button{background:none;border:0;color:var(--ink);cursor:pointer;padding:8px 12px;border-radius:8px}
+.lb button:hover{background:var(--soft)}
+.stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:0 clamp(56px,8vw,96px);overflow:hidden}
+.stage img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px;cursor:zoom-in;transition:opacity .14s,transform .35s var(--ease)}
+.stage.z img{transform:scale(2.2);cursor:zoom-out}
+.lb .nv{position:absolute;top:46%;transform:translateY(-50%);width:44px;height:44px;padding:0;display:grid;place-items:center}
+.pv{left:clamp(8px,2vw,24px)}.nx{right:clamp(8px,2vw,24px)}
+.cap{padding:14px var(--pad) 10px;max-width:var(--max);width:100%;margin:0 auto}
+.cap b{font-weight:600;font-size:1.05rem}
+.cap p{color:var(--mute);max-width:70ch;font-size:.95rem}
+.strip{display:flex;gap:6px;overflow-x:auto;padding:6px var(--pad) 16px;scrollbar-width:none}
+.strip::-webkit-scrollbar{display:none}
+.strip button{flex:none;width:72px;height:46px;padding:0;border-radius:4px;overflow:hidden;opacity:.45;transition:opacity .25s}
+.strip button:hover,.strip button.on{opacity:1}
+.strip button.on{box-shadow:0 0 0 2px var(--ink)}
+.strip img{width:100%;height:100%;object-fit:cover;display:block}
+@media(max-width:640px){
+.bar{top:-44px;backdrop-filter:none;background:var(--bg)}
+.bar .wrap{flex-wrap:wrap;height:auto;gap:0}
+.brand{height:44px;display:flex;align-items:center;width:100%}
+nav{width:calc(100% + 2*var(--pad));margin:0 calc(-1*var(--pad));padding:0 var(--pad) 6px}
+.hbar{flex-direction:column;align-items:flex-start;gap:6px}
+.hcopy{bottom:124px}
+.hcopy p{font-size:1rem;margin-top:12px}
+h1{max-width:11ch}
+.sh{margin-bottom:16px}
+.sh p{font-size:.9rem}
+}
+@media(hover:none){
+.lb .nv{display:none}
+.dot{height:30px}
+.dot::before,.dot i{top:14px}
+.stage{padding:0 8px}
+.stage img{cursor:default}
+}
+.card,.dot,nav button{-webkit-tap-highlight-color:transparent}
+.lb .top{padding-top:calc(12px + env(safe-area-inset-top))}
+.lb .top button{min-height:44px;min-width:64px}
+.strip{padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}.dot.on i{transform:scaleX(1)}}
+</style>
+</head>
+<body>
+<header class="bar"><div class="wrap"><div class="brand" id="brand"></div><nav id="filters" aria-label="Filter kategori"></nav></div><div class="prog" id="prog"></div></header>
+
+<section class="hero" id="hero" aria-label="Karya pilihan">
+  <div class="slides" id="slides"></div>
+  <div class="hshade"></div>
+  <div class="hcopy wrap"><h1 id="headline"></h1><p id="about"></p></div>
+  <div class="hbar wrap">
+    <button class="hcap" id="hcap" type="button"><b id="hct"></b><span id="hcm"></span></button>
+    <div class="dots" id="dots"></div>
+  </div>
+</section>
+
+<main class="wrap" id="main"><div id="grid"></div></main>
+<footer><div class="wrap"><span id="copy"></span><span id="contacts"></span></div></footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Pratinjau karya">
+  <div class="top"><span id="count"></span><button id="cl" type="button">Tutup</button></div>
+  <div class="stage" id="stage"><img id="big" alt=""></div>
+  <button class="nv pv" id="pv" type="button" aria-label="Sebelumnya"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12.5 4l-6 6 6 6"/></svg></button>
+  <button class="nv nx" id="nx" type="button" aria-label="Berikutnya"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7.5 4l6 6-6 6"/></svg></button>
+  <div class="cap"><b id="ct"></b><p id="cd"></p></div>
+  <div class="strip" id="strip"></div>
+</div>
+
+<script>
+/* PENGATURAN: ubah teks profil dan kontak di sini. */
+const profile = {
+  name: "Afaj",
+  headline: "Visualisasi 3D untuk arsitektur dan karakter.",
+  about: "Karya render dan pemodelan dengan Blender, Revit, dan AutoCAD.",
+  contacts: [] /* contoh: [{label:"Instagram", href:"https://instagram.com/namamu"},{label:"Email", href:"mailto:kamu@email.com"}] */
+};
+/* KARYA PILIHAN di slideshow atas (judul harus sama dengan di daftar works). */
+const featured = ["Mansion bata, tampak samping","Ruang kelas dengan cahaya sore","Kota pesisir dan barisan raksasa","Payung di tepi danau","Koridor lantai atas dengan skylight","Ruang tatami"];
+/* DAFTAR KARYA: title, cat (nama grup), tool, desc, ar (rasio lebar/tinggi). */
+const works = [{"title": "Mansion bata, tampak samping", "cat": "Arsitektur", "tool": "Blender", "desc": "Fasad bata dengan ornamen putih, atap mansard biru, dan lanskap pegunungan.", "ar": 1.7778, "th": "img/t/01-mansion-bata-tampak-samping.jpg", "m": "img/m/01-mansion-bata-tampak-samping.jpg", "src": "img/f/01-mansion-bata-tampak-samping.jpg"}, {"title": "Mansion bata, tampak depan", "cat": "Arsitektur", "tool": "Blender", "desc": "Fasad simetris dengan jendela berbingkai putih, atap mansard, dan pegunungan di belakang.", "ar": 1.7778, "th": "img/t/02-mansion-bata-tampak-depan.jpg", "m": "img/m/02-mansion-bata-tampak-depan.jpg", "src": "img/f/02-mansion-bata-tampak-depan.jpg"}, {"title": "Fasad rumah dengan tandon air", "cat": "Arsitektur", "tool": "Revit", "desc": "Tampak depan bangunan dua lantai dengan area parkir motor dan empat tandon di atap.", "ar": 1.7778, "th": "img/t/03-fasad-rumah-dengan-tandon-air.jpg", "m": "img/m/03-fasad-rumah-dengan-tandon-air.jpg", "src": "img/f/03-fasad-rumah-dengan-tandon-air.jpg"}, {"title": "Tangga dan lantai mosaik", "cat": "Arsitektur", "tool": "Revit", "desc": "Pandangan dari atas ke tangga baja dan lantai mosaik hitam kuning.", "ar": 1.7778, "th": "img/t/04-tangga-dan-lantai-mosaik.jpg", "m": "img/m/04-tangga-dan-lantai-mosaik.jpg", "src": "img/f/04-tangga-dan-lantai-mosaik.jpg"}, {"title": "Koridor lantai atas dengan skylight", "cat": "Arsitektur", "tool": "Revit", "desc": "Koridor putih berlantai gelap dengan railing hitam dan cahaya dari bukaan atap.", "ar": 1.7778, "th": "img/t/05-koridor-lantai-atas-dengan-skylight.jpg", "m": "img/m/05-koridor-lantai-atas-dengan-skylight.jpg", "src": "img/f/05-koridor-lantai-atas-dengan-skylight.jpg"}, {"title": "Pintu dan jendela vertikal", "cat": "Arsitektur", "tool": "Revit", "desc": "Tiga model pintu abu gelap dengan panel kaca dan handle panjang, bersama jendela vertikal.", "ar": 1.7778, "th": "img/t/06-pintu-dan-jendela-vertikal.jpg", "m": "img/m/06-pintu-dan-jendela-vertikal.jpg", "src": "img/f/06-pintu-dan-jendela-vertikal.jpg"}, {"title": "Model BIM rumah dua lantai", "cat": "Arsitektur", "tool": "Revit", "desc": "Potongan 3D dengan level, struktur lantai, dan pintu.", "ar": 1.5811, "th": "img/t/07-model-bim-rumah-dua-lantai.jpg", "m": "img/m/07-model-bim-rumah-dua-lantai.jpg", "src": "img/f/07-model-bim-rumah-dua-lantai.jpg"}, {"title": "Rumah dua lantai di SketchUp", "cat": "Arsitektur", "tool": "SketchUp", "desc": "Model rumah dua lantai dengan atap limas, balkon, dan carport.", "ar": 1.7803, "th": "img/t/08-rumah-dua-lantai-di-sketchup.jpg", "m": "img/m/08-rumah-dua-lantai-di-sketchup.jpg", "src": "img/f/08-rumah-dua-lantai-di-sketchup.jpg"}, {"title": "Ruang kelas dengan cahaya sore", "cat": "Interior", "tool": "Blender", "desc": "Meja kayu, rak toples, dan bayangan jendela yang jatuh di lantai keramik.", "ar": 1.7778, "th": "img/t/09-ruang-kelas-dengan-cahaya-sore.jpg", "m": "img/m/09-ruang-kelas-dengan-cahaya-sore.jpg", "src": "img/f/09-ruang-kelas-dengan-cahaya-sore.jpg"}, {"title": "Ruang tatami", "cat": "Interior", "tool": "Blender", "desc": "Ruang bergaya Jepang dengan pintu geser shoji dan bayangan cahaya di dinding.", "ar": 1.7778, "th": "img/t/10-ruang-tatami.jpg", "m": "img/m/10-ruang-tatami.jpg", "src": "img/f/10-ruang-tatami.jpg"}, {"title": "Ruang kerja, suasana siang", "cat": "Interior", "tool": "Blender", "desc": "Meja kerja dengan dua monitor, rak poster, dan lampu baca.", "ar": 1.7778, "th": "img/t/11-ruang-kerja.jpg", "m": "img/m/11-ruang-kerja.jpg", "src": "img/f/11-ruang-kerja.jpg"}, {"title": "Ruang kerja, suasana malam", "cat": "Interior", "tool": "Blender", "desc": "Versi malam dengan lampu baca, keyboard RGB, dan cahaya hangat dari lampu kecil.", "ar": 1.7778, "th": "img/t/26-ruang-kerja-malam.jpg", "m": "img/m/26-ruang-kerja-malam.jpg", "src": "img/f/26-ruang-kerja-malam.jpg"}, {"title": "Ruang kelas, sudut rendah", "cat": "Interior", "tool": "Blender", "desc": "Rak toples dan meja dari sudut kamera dekat lantai.", "ar": 1.8174, "th": "img/t/12-ruang-kelas-sudut-rendah.jpg", "m": "img/m/12-ruang-kelas-sudut-rendah.jpg", "src": "img/f/12-ruang-kelas-sudut-rendah.jpg"}, {"title": "Tujuh karakter di depan gerbang", "cat": "Karakter", "tool": "Blender", "desc": "Karakter berbulu dengan ekspresi masing-masing, di lingkungan taman dan gerbang besi.", "ar": 1.7778, "th": "img/t/13-tujuh-karakter-di-depan-gerbang.jpg", "m": "img/m/13-tujuh-karakter-di-depan-gerbang.jpg", "src": "img/f/13-tujuh-karakter-di-depan-gerbang.jpg"}, {"title": "Penyihir dengan tongkat", "cat": "Karakter", "tool": "Blender", "desc": "Karakter berjubah dengan pencahayaan dramatis di latar gelap.", "ar": 1.7778, "th": "img/t/14-penyihir-dengan-tongkat.jpg", "m": "img/m/14-penyihir-dengan-tongkat.jpg", "src": "img/f/14-penyihir-dengan-tongkat.jpg"}, {"title": "Studi bulu karakter", "cat": "Karakter", "tool": "Blender", "desc": "Tiga karakter dengan shader bulu di studio abu-abu.", "ar": 1.7778, "th": "img/t/15-studi-bulu-karakter.jpg", "m": "img/m/15-studi-bulu-karakter.jpg", "src": "img/f/15-studi-bulu-karakter.jpg"}, {"title": "Penyihir tanpa jubah", "cat": "Karakter", "tool": "Blender", "desc": "Versi karakter tanpa jubah dengan cahaya tepi hijau dan merah.", "ar": 1.7778, "th": "img/t/16-penyihir-tanpa-jubah.jpg", "m": "img/m/16-penyihir-tanpa-jubah.jpg", "src": "img/f/16-penyihir-tanpa-jubah.jpg"}, {"title": "Kota pesisir dan barisan raksasa", "cat": "Sinematik", "tool": "Blender", "desc": "Rumah bata di tepi air dengan siluet raksasa merah di kejauhan.", "ar": 1.7778, "th": "img/t/17-kota-pesisir-dan-barisan-raksasa.jpg", "m": "img/m/17-kota-pesisir-dan-barisan-raksasa.jpg", "src": "img/f/17-kota-pesisir-dan-barisan-raksasa.jpg"}, {"title": "Payung di tepi danau", "cat": "Sinematik", "tool": "Blender", "desc": "Karakter berpayung menghadap danau, dengan kabin dan pepohonan musim gugur.", "ar": 1.7778, "th": "img/t/18-payung-di-tepi-danau.jpg", "m": "img/m/18-payung-di-tepi-danau.jpg", "src": "img/f/18-payung-di-tepi-danau.jpg"}, {"title": "Payung di depan gedung bata", "cat": "Sinematik", "tool": "Blender", "desc": "Karakter dengan payung di depan bangunan bata saat cahaya sore.", "ar": 1.7778, "th": "img/t/19-payung-di-depan-gedung-bata.jpg", "m": "img/m/19-payung-di-depan-gedung-bata.jpg", "src": "img/f/19-payung-di-depan-gedung-bata.jpg"}, {"title": "Dua raksasa bertarung", "cat": "Sinematik", "tool": "Blender", "desc": "Efek api dan asap di lanskap berbukit.", "ar": 1.7778, "th": "img/t/20-dua-raksasa-bertarung.jpg", "m": "img/m/20-dua-raksasa-bertarung.jpg", "src": "img/f/20-dua-raksasa-bertarung.jpg"}, {"title": "Stasiun sortir: hasil rakitan", "cat": "Teknik", "tool": "Hardware", "desc": "Lengan robot, konveyor dengan sensor, panel kelistrikan, dan dua bak sortir di atas rangka aluminium.", "ar": 1.4995, "th": "img/t/27-stasiun-sortir-hasil-rakitan.jpg", "m": "img/m/27-stasiun-sortir-hasil-rakitan.jpg", "src": "img/f/27-stasiun-sortir-hasil-rakitan.jpg"}, {"title": "Stasiun sortir: model di SolidWorks", "cat": "Teknik", "tool": "SolidWorks", "desc": "Lengan robot, konveyor, lengan pengambil, dan bak sortir di atas rangka aluminium profil.", "ar": 1.5478, "th": "img/t/28-stasiun-sortir-solidworks.jpg", "m": "img/m/28-stasiun-sortir-solidworks.jpg", "src": "img/f/28-stasiun-sortir-solidworks.jpg"}, {"title": "Render rakitan mekanik", "cat": "Teknik", "tool": "Blender", "desc": "Rangka aluminium profil dengan rakitan mekanik di atasnya.", "ar": 1.7778, "th": "img/t/21-render-rakitan-mekanik.jpg", "m": "img/m/21-render-rakitan-mekanik.jpg", "src": "img/f/21-render-rakitan-mekanik.jpg"}, {"title": "Model 3D mekanik di AutoCAD", "cat": "Teknik", "tool": "AutoCAD", "desc": "Tampilan realistic dari model mekanik berlapis warna per layer.", "ar": 1.7803, "th": "img/t/22-model-3d-mekanik-di-autocad.jpg", "m": "img/m/22-model-3d-mekanik-di-autocad.jpg", "src": "img/f/22-model-3d-mekanik-di-autocad.jpg"}, {"title": "Braket dan lengan penyangga kotak", "cat": "Teknik", "tool": "SolidWorks", "desc": "Braket U dengan lengan dua sendi yang menahan kotak komponen elektronik.", "ar": 1.2249, "th": "img/t/29-dudukan-lengan-solidworks.jpg", "m": "img/m/29-dudukan-lengan-solidworks.jpg", "src": "img/f/29-dudukan-lengan-solidworks.jpg"}, {"title": "Papan elektronik di pelat dasar", "cat": "Teknik", "tool": "SolidWorks", "desc": "Model rangkaian dengan terminal, kapasitor, dan dimensi pada pelat dasar.", "ar": 1.4127, "th": "img/t/30-papan-elektronik-solidworks.jpg", "m": "img/m/30-papan-elektronik-solidworks.jpg", "src": "img/f/30-papan-elektronik-solidworks.jpg"}, {"title": "Viewport Blender: karakter dan payung", "cat": "Proses", "tool": "Blender", "desc": "Tampilan kerja saat simulasi kain pada payung dan kerah.", "ar": 1.7803, "th": "img/t/23-viewport-blender-karakter-dan-payung.jpg", "m": "img/m/23-viewport-blender-karakter-dan-payung.jpg", "src": "img/f/23-viewport-blender-karakter-dan-payung.jpg"}, {"title": "Viewport Blender: karakter dan rambut", "cat": "Proses", "tool": "Blender", "desc": "Tampilan kerja dengan sistem partikel rambut dan dedaunan musim gugur.", "ar": 1.7803, "th": "img/t/24-viewport-blender-karakter-dan-rambut.jpg", "m": "img/m/24-viewport-blender-karakter-dan-rambut.jpg", "src": "img/f/24-viewport-blender-karakter-dan-rambut.jpg"}, {"title": "Model rumah di Revit dengan sun path", "cat": "Proses", "tool": "Revit", "desc": "Tampilan 3D di Revit lengkap dengan lintasan matahari dan level bangunan.", "ar": 2.2504, "th": "img/t/25-model-rumah-di-revit-dengan-sun-path.jpg", "m": "img/m/25-model-rumah-di-revit-dengan-sun-path.jpg", "src": "img/f/25-model-rumah-di-revit-dengan-sun-path.jpg"}];
+const groups=[
+ {name:"Arsitektur",note:"Bangunan hunian dan model BIM, dari eksterior sampai detail ruang."},
+ {name:"Interior",note:"Ruang dengan cahaya alami dan properti detail."},
+ {name:"Karakter",note:"Pemodelan karakter, material bulu, dan pencahayaan studio."},
+ {name:"Sinematik",note:"Adegan dengan komposisi kamera dan suasana."},
+ {name:"Teknik",note:"Model dan hasil rakitan mekatronika, dari desain sampai alat jadi."},
+ {name:"Proses",note:"Tampilan kerja di dalam software."}
+];
+const $=id=>document.getElementById(id),reduce=matchMedia('(prefers-reduced-motion:reduce)').matches,touch=matchMedia('(hover:none)').matches;
+const grid=$('grid'),filters=$('filters'),lb=$('lb'),stage=$('stage'),big=$('big'),strip=$('strip'),hero=$('hero');
+let cur="Semua",shown=[],list=[],idx=0,last=null,rows=[],hi=0;
+const mk=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x)e.textContent=x;return e};
+
+$('brand').textContent=profile.name;$('headline').textContent=profile.headline;$('about').textContent=profile.about;
+$('copy').textContent="\u00a9 "+new Date().getFullYear()+" "+profile.name;
+profile.contacts.forEach(c=>{const a=mk('a','',c.label);a.href=c.href;$('contacts').appendChild(a)});
+
+/* Reveal saat scroll */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -6% 0px',threshold:.04});
+
+/* Filter */
+const ind=mk('i','ind');filters.appendChild(ind);
+function moveInd(){const b=filters.querySelector('[aria-pressed=true]');if(b){ind.style.width=b.offsetWidth+'px';ind.style.transform='translateX('+b.offsetLeft+'px)'}}
+function buildFilters(){
+  [{name:"Semua",n:works.length},...groups.map(g=>({name:g.name,n:works.filter(w=>w.cat===g.name).length})).filter(g=>g.n)].forEach(c=>{
+    const b=mk('button');b.type='button';b.append(mk('span','',c.name),mk('small','',c.n));
+    b.setAttribute('aria-pressed',c.name===cur);
+    b.onclick=()=>{if(cur===c.name)return;cur=c.name;filters.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));moveInd();swap()};
+    filters.appendChild(b);
+  });
+  moveInd();
+}
+function swap(){
+  grid.classList.add('out');
+  setTimeout(()=>{render();grid.classList.remove('out');scrollTo({top:$('main').offsetTop-(innerWidth<640?48:64),behavior:reduce?'auto':'smooth'})},reduce?0:180);
+}
+
+/* Galeri: baris rata (justified), gambar tidak terpotong berlebihan */
+function layout(el,items){
+  const W=el.clientWidth,g=8,th=W>900?270:W>560?220:260;let row=[],sum=0;
+  const ar=it=>it.ar*(it.first&&W>900?1.35:1);
+  const flush=fin=>{let h=(W-g*(row.length-1))/sum;if(fin&&h>th*1.3)h=th;row.forEach(r=>{r.node.style.width=Math.floor(ar(r)*h)+'px';r.node.style.height=Math.floor(h)+'px'});row=[];sum=0};
+  items.forEach(it=>{row.push(it);sum+=ar(it);if((W-g*(row.length-1))/sum<=th)flush(false)});
+  if(row.length)flush(true);
+}
+function layoutAll(){rows.forEach(r=>layout(r.el,r.items))}
+function render(){
+  grid.innerHTML='';shown=[];rows=[];
+  groups.filter(g=>cur==="Semua"||g.name===cur).forEach(g=>{
+    const items=works.filter(w=>w.cat===g.name);if(!items.length)return;
+    const sec=mk('section','sec'),h=mk('div','sh rv'),t=mk('h2','',g.name);
+    t.appendChild(mk('small','',items.length+" karya"));h.append(t,mk('p','',g.note));
+    const wrap=mk('div','rows'),its=[];
+    items.forEach((w,k)=>{
+      shown.push(w);const i=shown.length-1;
+      const b=mk('button','card rv');b.type='button';b.setAttribute('aria-label','Buka '+w.title);
+      b.style.transitionDelay=(k%4)*70+'ms';
+      const im=new Image();im.src=w.th;im.alt=w.title;im.loading='lazy';im.decoding='async';
+      const ov=mk('div','ov');ov.append(mk('b','',w.title),mk('span','',w.tool||w.cat));
+      b.append(im,ov);b.onclick=()=>open(shown,i,b);wrap.appendChild(b);
+      its.push({node:b,ar:w.ar||1.78,first:k===0});
+    });
+    sec.append(h,wrap);grid.appendChild(sec);rows.push({el:wrap,items:its});
+  });
+  layoutAll();grid.querySelectorAll('.rv').forEach(e=>io.observe(e));
+}
+
+/* Hero slideshow */
+function hs(w){return innerWidth<700&&w.m?w.m:w.src}
+function ld(n){const im=$('slides').children[(n+feat.length)%feat.length].querySelector('img');if(!im.getAttribute('src'))im.src=im.dataset.src}
+const feat=featured.map(t=>works.find(w=>w.title===t)).filter(Boolean);
+feat.forEach((w,k)=>{
+  const s=mk('div','sl'),im=new Image();im.alt=w.title;if(k===0){im.fetchPriority='high';im.src=hs(w)}else im.dataset.src=hs(w);s.appendChild(im);$('slides').appendChild(s);
+  const d=mk('button','dot');d.type='button';d.setAttribute('aria-label','Karya '+(k+1));d.appendChild(mk('i'));d.onclick=()=>go(k);$('dots').appendChild(d);
+});
+function go(n){
+  hi=(n+feat.length)%feat.length;const w=feat[hi];ld(hi);ld(hi+1);
+  [...$('slides').children].forEach((s,k)=>s.classList.toggle('on',k===hi));
+  [...$('dots').children].forEach((d,k)=>{d.classList.remove('on');void d.offsetWidth;d.classList.toggle('on',k===hi);d.classList.toggle('done',k<hi)});
+  $('hct').textContent=w.title;$('hcm').textContent=[w.cat,w.tool].filter((v,i,a)=>v&&a.indexOf(v)===i).join(", ");
+}
+$('dots').addEventListener('animationend',e=>{if(e.animationName==='fill')go(hi+1)});
+const pz=v=>hero.classList.toggle('pause',v);
+hero.addEventListener('mouseenter',()=>pz(true));hero.addEventListener('mouseleave',()=>pz(false));
+hero.addEventListener('focusin',()=>pz(true));hero.addEventListener('focusout',()=>pz(false));
+document.addEventListener('visibilitychange',()=>pz(document.hidden));
+$('slides').onclick=()=>open(feat,hi,$('hcap'));$('hcap').onclick=()=>open(feat,hi,$('hcap'));
+if(feat.length)go(0);else hero.style.display='none';
+
+/* Scroll: progres dan parallax */
+let tk=false;
+addEventListener('scroll',()=>{if(tk)return;tk=true;requestAnimationFrame(()=>{
+  const de=document.documentElement;$('prog').style.transform='scaleX('+(scrollY/Math.max(1,de.scrollHeight-innerHeight))+')';
+  if(!reduce&&!touch&&scrollY<innerHeight)$('slides').style.transform='translateY('+(scrollY*.2)+'px)';tk=false})},{passive:true});
+let rt;addEventListener('resize',()=>{cancelAnimationFrame(rt);rt=requestAnimationFrame(()=>{layoutAll();moveInd()})});
+
+/* Lightbox */
+function buildStrip(){
+  strip.innerHTML='';
+  list.forEach((w,k)=>{const b=mk('button');b.type='button';b.setAttribute('aria-label',w.title);const im=new Image();im.src=w.th;im.alt='';im.loading='lazy';b.appendChild(im);b.onclick=()=>set(k);strip.appendChild(b)});
+}
+function set(i,instant){
+  idx=(i+list.length)%list.length;const w=list[idx];
+  const apply=()=>{big.src=w.src;big.alt=w.title;big.style.opacity=1};
+  stage.classList.remove('z');big.style.transformOrigin='';
+  if(instant||reduce)apply();else{big.style.opacity=0;setTimeout(apply,140)}
+  $('ct').textContent=w.title;$('cd').textContent=[w.tool,w.desc].filter(Boolean).join(". ");
+  $('count').textContent=(idx+1)+" / "+list.length;
+  [...strip.children].forEach((b,k)=>b.classList.toggle('on',k===idx));
+  const a=strip.children[idx];if(a)strip.scrollTo({left:a.offsetLeft-strip.clientWidth/2+a.offsetWidth/2,behavior:instant?'auto':'smooth'});
+  if(!(navigator.connection&&navigator.connection.saveData))[1,-1].forEach(d=>{new Image().src=list[(idx+d+list.length)%list.length].src});
+}
+function open(l,i,el){list=l;last=el;buildStrip();set(i,true);lb.classList.add('on');document.body.style.overflow='hidden';pz(true);$('cl').focus()}
+function close(){lb.classList.remove('on');document.body.style.overflow='';pz(false);if(last)last.focus()}
+$('cl').onclick=close;$('pv').onclick=()=>set(idx-1);$('nx').onclick=()=>set(idx+1);
+stage.onclick=e=>{if(e.target===big)stage.classList.toggle('z');else close()};
+stage.onmousemove=e=>{if(!stage.classList.contains('z'))return;const r=stage.getBoundingClientRect();big.style.transformOrigin=((e.clientX-r.left)/r.width*100)+'% '+((e.clientY-r.top)/r.height*100)+'%'};
+document.addEventListener('keydown',e=>{
+  if(!lb.classList.contains('on'))return;
+  if(e.key==='Escape')close();if(e.key==='ArrowLeft')set(idx-1);if(e.key==='ArrowRight')set(idx+1);
+});
+let sx=null,sy=0;
+const org=t=>{const r=stage.getBoundingClientRect();big.style.transformOrigin=((t.clientX-r.left)/r.width*100)+'% '+((t.clientY-r.top)/r.height*100)+'%'};
+stage.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;if(stage.classList.contains('z'))org(e.touches[0])},{passive:true});
+stage.addEventListener('touchmove',e=>{if(stage.classList.contains('z'))org(e.touches[0])},{passive:true});
+stage.addEventListener('touchend',e=>{if(sx===null)return;const t=e.changedTouches[0],d=t.clientX-sx;sx=null;if(!stage.classList.contains('z')&&Math.abs(d)>50&&Math.abs(t.clientY-sy)<80)set(idx+(d<0?1:-1))});
+
+buildFilters();render();
+</script>
+</body>
+</html>
